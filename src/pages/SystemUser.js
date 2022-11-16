@@ -1,6 +1,6 @@
-import "./SystemUserPage.css";
+import "./SystemUser.css";
 
-export default function SystemUserPage(){
+export default function SystemUse(){
   return (
     <div>SystemUser</div>
   )
