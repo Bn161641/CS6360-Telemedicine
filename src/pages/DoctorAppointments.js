@@ -1,3 +1,11 @@
+import "./DoctorAppointments.css"
+
 export default function DoctorProfile(){
-  return (<h1>Appointment</h1>);
+  return (
+    <div className="doctorAppointmentGrid">
+      <div className="doctorAppointmentCard doctorTodayCard">
+        
+      </div>
+    </div>
+  );
 }

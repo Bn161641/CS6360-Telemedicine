@@ -1,11 +1,9 @@
 import "./DoctorPage.css";
 import { useParams, Outlet } from 'react-router-dom';
-import { useState } from "react";
 import DoctorSideNav from "./DoctorSideNav";
 import DoctorTopNav from "./DoctorTopNav";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { doctorInfoActions } from "../store/doctorInfoSlice";
 import { fetchDoctorInfo, sendOfficesData, sendServicesData } from "../store/doctorInfo-action";
 
 export default function DoctorPage() {
@@ -39,7 +37,7 @@ export default function DoctorPage() {
     <div className="doctorPage">
       <DoctorSideNav id={doctorId} fullName={fullName} title={title} hospitalName={hospitalName} state={state} />
       <div className="doctorContent">
-        <DoctorTopNav />
+        <DoctorTopNav fullName={fullName}/>
         <Outlet />
       </div>
     </div>
