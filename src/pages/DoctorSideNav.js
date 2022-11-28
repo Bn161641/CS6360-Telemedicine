@@ -10,8 +10,9 @@ export default function DoctorSideNav(props) {
       <img
         className="doctorInverseLogo"
         src={require("../asset/telemedicine-inverse-logo-crop.png")}
+        alt="logo"
       />
-      <img className="doctorPic" src={require("../asset/femalDoctor.jpg")} />
+      <img className="doctorPic" alt="profile" src={require("../asset/femalDoctor.jpg")} />
       <p className="doctorName">{props.fullName}</p>
       <p className="doctorTitle">{props.title}</p>
       <p className="doctorHospital">@{props.hospitalName}</p>
