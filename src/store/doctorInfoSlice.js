@@ -10,8 +10,13 @@ const doctorInitialState = {
   website: "",
   title: "",
   state: "",
-  services: [],
-  offices: [],
+  hospitalName: "",
+  services: {
+    list: [],
+    changed: false},
+  offices: {
+    list: [],
+    changed: false},
   reviews: [],
   appointments: [],
 };
@@ -47,11 +52,30 @@ const doctorInfoSlice = createSlice({
     setState(state, action){
       state.state = action.payload;
     },
+    setHospitalName(state, action){
+      state.hospitalName = action.payload;
+    },
+    setServices(state, action){
+      state.services.list = action.payload;
+    },
     addService(state, action) {
-      state.services.push(action.payload);
+      state.services.list.push(action.payload);
+      state.services.changed = true;
+    },
+    removeService(state, action) {
+      state.services.list.filter(service => service.name != action.payload);
+      state.services.changed = true;
+    },
+    setOffices(state, action){
+      state.offices.list = action.payload;
     },
     addOffice(state, action) {
-      state.offices.push(action.payload);
+      state.offices.list.push(action.payload);
+      state.offices.changed = true;
+    },
+    removeOffice(state, action) {
+      state.offices.list.filter(office => office.id != action.payload);
+      state.offices.changed = true;
     },
     setReviews(state, action){
       state.reviews = action.payload;

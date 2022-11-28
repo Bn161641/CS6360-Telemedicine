@@ -3,6 +3,7 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import LogoutIcon from "@mui/icons-material/Logout";
 import "./DoctorSideNav.css";
+import { NavLink } from "react-router-dom";
 
 export default function DoctorSideNav(props) {
   return (
@@ -12,7 +13,11 @@ export default function DoctorSideNav(props) {
         src={require("../asset/telemedicine-inverse-logo-crop.png")}
         alt="logo"
       />
-      <img className="doctorPic" alt="profile" src={require("../asset/femalDoctor.jpg")} />
+      <img
+        className="doctorPic"
+        alt="profile"
+        src={require("../asset/femalDoctor.jpg")}
+      />
       <p className="doctorName">{props.fullName}</p>
       <p className="doctorTitle">{props.title}</p>
       <p className="doctorHospital">@{props.hospitalName}</p>
@@ -21,19 +26,40 @@ export default function DoctorSideNav(props) {
         {props.state}
       </p>
       <ul className="doctorSidebarMenu">
-        <li className="active">
-          {" "}
-          <AccountBoxIcon className="doctorSideBarIcon" /> Profile
+        <li>
+          <NavLink
+            to={"/doctor/" + props.id + "/profile"}
+            className={(navData) =>
+              navData.isActive ? "active navListItem" : "navListItem"
+            }
+          >
+            {" "}
+            <AccountBoxIcon className="doctorSideBarIcon" /> Profile
+          </NavLink>
         </li>
         <li>
-          {" "}
-          <CalendarTodayIcon className="doctorSideBarIcon" /> Appointments
+          <NavLink
+            to={"/doctor/" + props.id + "/appointments"}
+            className={(navData) =>
+              navData.isActive ? "active navListItem" : "navListItem"
+            }
+          >
+            {" "}
+            <CalendarTodayIcon className="doctorSideBarIcon" /> Appointments
+          </NavLink>
         </li>
         <li>
-          {" "}
-          <LogoutIcon className="doctorSideBarIcon" /> Logout
+          <NavLink
+            to="/login"
+            className={(navData) =>
+              navData.isActive ? "active navListItem" : "navListItem"
+            }
+          >
+            {" "}
+            <LogoutIcon className="doctorSideBarIcon" /> Logout
+          </NavLink>
         </li>
       </ul>
     </nav>
   );
-};
+}

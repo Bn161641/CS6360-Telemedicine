@@ -65,26 +65,32 @@
 }
 
 .doctorSidebarMenu li{
-  margin-bottom: 15px;
+  width: 100%;
+  text-decoration: none;
+}
+
+.navListItem{
   display: flex;
   align-items: center;
   width: 100%;
   text-decoration: none;
+  color: white;
   padding: 10px;
+  margin-bottom: 15px;
 }
 
 .doctorSidebarMenu .doctorSideBarIcon{
   margin-right: 10px;
 }
 
-.active, .doctorSidebarMenu li:hover {
+.active, .doctorSidebarMenu .navListItem:hover {
   background-color: white;
   color:#2D3A64;
   border-radius: 20px 0 0 20px;
   position: relative;
 }
 
-.active::before, .active::after, .doctorSidebarMenu li:hover::before, .doctorSidebarMenu li:hover::after {
+.active::before, .active::after, .doctorSidebarMenu .navListItem:hover::before, .doctorSidebarMenu .navListItem:hover::after {
   content: "";
   position: absolute;
   right: -20.5px;
@@ -93,12 +99,12 @@
   width: 70px;
 }
 
-.active::before, .doctorSidebarMenu li:hover::before{
+.active::before, .doctorSidebarMenu .navListItem:hover::before{
   bottom: -40px;
   border-top-right-radius: 20px;
   box-shadow: 20px -25px 0 0 white;
 }
-.active::after, .doctorSidebarMenu li:hover::after{
+.active::after, .doctorSidebarMenu .navListItem:hover::after{
   top: -40px;
   border-bottom-right-radius: 20px;
   box-shadow: 20px 25px 0 0 white;

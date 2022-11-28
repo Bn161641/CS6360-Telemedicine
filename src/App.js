@@ -5,6 +5,8 @@ import Login from "./pages/Login";
 import DoctorPage from "./pages/DoctorPage";
 import PatientPage from "./pages/PatientPage";
 import SystemUser from "./pages/SystemUser";
+import DoctorProfile from "./pages/DoctorProfile";
+import DoctorAppointments from "./pages/DoctorAppointments";
 import { useSelector, useDispatch } from 'react-redux';
 import { sendAppointmentData, fetchAppointmentData } from "./store/appointment-action";
 import { useEffect } from "react";
@@ -29,8 +31,8 @@ function App() {
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/doctor/*" element={<DoctorPage />}>
-          <Route path=":id/profile" element={<doctorProfile />} />
-          <Route path=":id/appointments" element={<doctorAppointments />} />
+          <Route path=":id/profile" element={<DoctorProfile />} />
+          <Route path=":id/appointments" element={<DoctorAppointments />} />
         </Route>
         <Route path="/system-user" element={<SystemUser />} />
         <Route path="/patient" element={<PatientPage />} />
