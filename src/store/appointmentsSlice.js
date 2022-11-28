@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { act } from "react-dom/test-utils";
 
 const appointmentInitialState = {
   appointments: [],
+  changed: false,
 };
 
 const appointmentsSlice = createSlice({
   name: "appointmentInfo",
   initialState: appointmentInitialState,
   reducers: {
-    setInitialAppointments(state, action) {
+    replaceAppointments(state, action) {
       state.appointments = action.payload;
     },
     addAppointment(state, action) {
@@ -21,28 +21,27 @@ const appointmentsSlice = createSlice({
         pid: action.payload.pid,
         did: action.payload.did,
         url: action.payload.url,
+        location: action.payload.location,
         service: action.payload.service,
         bill: {}
       };
-
+    
       state.appointments.push(appointment);
+      state.changed = true;
     },
     removeAppointments(state, action) {
       state.appointments = state.appointments.filter(appointment => appointment.id != action.payload);
-    },
-    getAppointmentByPatient(state, action) {
-      return state.appointments.filter(appointment => appointment.pid === action.payload);
-    },
-    getAppointmentByDoctor(state, action) {
-      return state.appointments.filter(appointment => appointment.did === action.payload);
+      state.changed = true;
     },
     verifyAppointment(state, action) {
       let appointmentToVerifyIndex = state.appointments.findIndex(appointment => appointment.id === action.payload);
       state.appointments[appointmentToVerifyIndex].isValid = true;
+      state.changed = true;
     },
     alterAppointment(state, action) {
       let appointmentToAlterIndex = state.appointments.findIndex(appointment => appointment.id === action.payload.id);
       state.appointments[appointmentToAlterIndex].dateTime = action.payload.dateTime;
+      state.changed = true;
     },
     createBill(state, action) {
       let newBill = {
@@ -52,6 +51,7 @@ const appointmentsSlice = createSlice({
       }
       let appointmentToCreateBillForIndex = state.appointments.findIndex(appointment => appointment.id === action.payload.appointmentId);
       state.appointments[appointmentToCreateBillForIndex].bill = newBill;
+      state.changed = true;
     },
   }
 });
