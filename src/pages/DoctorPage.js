@@ -1,9 +1,7 @@
 import "./DoctorPage.css";
+import { useParams, Outlet } from 'react-router-dom';
 import { useState } from "react";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-import LogoutIcon from "@mui/icons-material/Logout";
+import DoctorSideNav from "./DoctorSideNav";
 import SearchIcon from '@mui/icons-material/Search';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 
@@ -13,36 +11,10 @@ export default function DoctorPage() {
   const [hospitalName, setHospitalName] = useState("Vibra Hospital");
   const [state, setState] = useState("Texas, US");
 
+
   return (
     <div className="doctorPage">
-      <nav className="doctorSideBar">
-        <img
-          className="doctorInverseLogo"
-          src={require("../asset/telemedicine-inverse-logo-crop.png")}
-        />
-        <img className="doctorPic" src={require("../asset/femalDoctor.jpg")} />
-        <p className="doctorName">{fullName}</p>
-        <p className="doctorTitle">{title}</p>
-        <p className="doctorHospital">@{hospitalName}</p>
-        <p className="doctorState">
-          <LocationOnIcon />
-          {state}
-        </p>
-        <ul className="doctorSidebarMenu">
-          <li className="active">
-            {" "}
-            <AccountBoxIcon className="doctorSideBarIcon" /> Profile
-          </li>
-          <li>
-            {" "}
-            <CalendarTodayIcon className="doctorSideBarIcon" /> Appointments
-          </li>
-          <li>
-            {" "}
-            <LogoutIcon className="doctorSideBarIcon" /> Logout
-          </li>
-        </ul>
-      </nav>
+      <DoctorSideNav fullName={fullName} title={title} hospitalName={hospitalName} state={state} />
       <div className="doctorContent">
         <nav className="doctorTopBar">
           <div className="doctorProfileTitle">
@@ -63,6 +35,7 @@ export default function DoctorPage() {
             <img src={require("../asset/femalDoctor.jpg")} />
           </div>
         </nav>
+        <Outlet />
       </div>
     </div>
   );
