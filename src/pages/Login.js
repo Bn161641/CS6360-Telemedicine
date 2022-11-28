@@ -27,15 +27,15 @@ export default function Login() {
     //put logic to validate user here
 
     //after validation put the logic here to switch to either the system user, doctor, or patient
-    //for now I am hard coding doctor
+    //for now I am hard coding doctor and id of 1
     //if the credential is invalid set user to be to be error (user = "error");
-
+    userID = 1;
     user = "doctor";
 
     switch (user) {
       case "doctor":
         setInvalid(false);
-        navigate("/doctor/1/profile");
+        navigate("/doctor/" + userID + "/profile");
         break;
       case "patient":
         setInvalid(false);
