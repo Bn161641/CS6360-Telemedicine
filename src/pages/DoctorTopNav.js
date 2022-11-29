@@ -21,7 +21,7 @@ export default function DoctorTopNav(props) {
   return (
     <nav className="doctorTopBar">
       <div className="doctorProfileTitle">
-        <h1>Dr. {fullName}'s {page}</h1>
+        <h1>{page}</h1>
       </div>
       <div class="searchBar">
         <input type="text" className="searchBarInput" placeholder="Search" />

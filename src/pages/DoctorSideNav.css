@@ -13,8 +13,9 @@
 
 .doctorInverseLogo {
   width: 200px;
-  padding-bottom: 15px;
+  padding-bottom: 10px;
   border-bottom: 1px solid white;
+  margin-top: -5px;
 }
 
 .doctorPic{
