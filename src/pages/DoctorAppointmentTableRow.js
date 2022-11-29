@@ -33,6 +33,7 @@ export default function Row(props) {
   const [appointmentTime, setAppointmentTime] = useState(dayjs(row.dateTime));
 
   const [billCost, setBillCost] = useState(row.bill ? row.bill.amount : "");
+  const [appointmentNotes, setAppointmentNotes] = useState(row.notes);
   const appointments = useSelector(
     (state) => state.appointmentInfo.appointments
   );
@@ -67,15 +68,24 @@ export default function Row(props) {
     );
   }
 
-  function deleteAppointment(){
-    if(deleteMode){
+  function deleteAppointment() {
+    if (deleteMode) {
       dispatch(appointmentsActions.removeAppointments(row.id));
     }
   }
 
+  function updateNote(event) {
+    event.preventDefault();
+    dispatch(appointmentsActions.editNote({id: row.id, notes: appointmentNotes}))
+    console.log(appointments)
+  }
+
   return (
     <Fragment>
-      <TableRow onClick={deleteAppointment} className={deleteMode ? "doctorTableRow" : ""}>
+      <TableRow
+        onClick={deleteAppointment}
+        className={deleteMode ? "doctorTableRow" : ""}
+      >
         <TableCell align="left">
           {row.isValid ? <CheckIcon className="checkedIcon" /> : ""}
         </TableCell>
@@ -111,7 +121,7 @@ export default function Row(props) {
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
-              <div className="doctorAppointmentExpander">
+              <div className="doctorAppointmentExpanderTop">
                 <div className="doctorAppointmentExpanderVerify">
                   <form
                     onSubmit={validatAppointment}
@@ -198,17 +208,46 @@ export default function Row(props) {
                     </button>
                   </form>
                 </div>
-                {!row.location && (
+                {!row.location ? (
                   <div className="doctorAppointmentExpanderLocation">
-                    <p className="doctionAppointmentLocationExpanderTitle">URL: </p>
-                    <a href="https://google.com" target="_blank" rel="noreferrer" className="doctionAppointmentLocationExpanderDetail">{row.url}</a>
+                    <p className="doctionAppointmentLocationExpanderTitle">
+                      URL:{" "}
+                    </p>
+                    <a
+                      href="https://google.com"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="doctionAppointmentLocationExpanderDetail"
+                    >
+                      {row.url}
+                    </a>
                   </div>
+                ) : (
+                  <div className="doctorAppointmentExpanderLocation"></div>
                 )}
               </div>
-              {/* {!row.location && <div className="doctionAppointmentLocationExpander">
-                <p className="doctionAppointmentLocationExpanderTitle">URL: </p>
-                <p className="doctionAppointmentLocationExpanderDetail">{row.url}</p>
-                </div>} */}
+              <div className="doctorAppointmentExpanderBottom">
+                <p className="doctorAppointmentExpanderBottomTitle">Notes</p>
+                <form className="doctorAppointmentExpanderBottomTitleForm" onSubmit={updateNote}>
+                  <div className="appointmentNoteContainer">
+                    <TextField
+                      style={{ width: "100%", backgroundColor: "#EAF3FA" }}
+                      multiline
+                      rows={3}
+                      value={appointmentNotes}
+                      variant="standard"
+                      onChange={(event) =>
+                        setAppointmentNotes(event.target.value)
+                      }
+                    />
+                  </div>
+                  <div className="appointmentNoteButtonContainer">
+                    <button type="submit" className="appointmentNoteButton">
+                      Submit
+                    </button>
+                  </div>
+                </form>
+              </div>
             </Box>
           </Collapse>
         </TableCell>

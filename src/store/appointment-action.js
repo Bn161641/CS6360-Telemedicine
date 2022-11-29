@@ -59,6 +59,7 @@ export function fetchAppointmentData() {
           pid: 1,      //patient id
           pidName: "Robert Lee",
           did: 1,      //doctor id
+          didName: "Helena Hall",
           url: "www.teams.com/d38djd",
           location: null,
           service: "Surgery",
@@ -72,6 +73,7 @@ export function fetchAppointmentData() {
           pid: 2,      //patient id
           pidName: "Johnson Raker",
           did: 1,      //doctor id
+          didName: "Helena Hall",
           url: null,
           location: "1234 Makebelieve Dr, Richardson, TX 75080",
           service: "Surgery",
@@ -84,11 +86,12 @@ export function fetchAppointmentData() {
         {
           id: 3,
           dateTime: new Date('December 4, 2022 08:30:00'),
-          notes: "RemoveToe",
+          notes: "Remove Toe",
           isValid: false,
           pid: 3,      //patient id
           pidName: "Daniel Raker",
           did: 1,      //doctor id
+          didName: "Helena Hall",
           url: null,
           location: "1234 Makebelieve Dr, Richardson, TX 75080",
           service: "Surgery",

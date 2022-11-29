@@ -19,7 +19,9 @@ const appointmentsSlice = createSlice({
         notes: action.payload.notes,
         isValid: false,
         pid: action.payload.pid,
+        pidName: action.payload.pidName,
         did: action.payload.did,
+        did: action.payload.didName,
         url: action.payload.url,
         location: action.payload.location,
         service: action.payload.service,
@@ -53,6 +55,10 @@ const appointmentsSlice = createSlice({
       state.appointments[appointmentToCreateBillForIndex].bill = newBill;
       state.changed = true;
     },
+    editNote(state, action){
+      let appointmentToEditNoteIndex = state.appointments.findIndex(appointment => appointment.id === action.payload.id);
+      state.appointments[appointmentToEditNoteIndex].notes = action.payload.notes;
+    }
   }
 });
 
