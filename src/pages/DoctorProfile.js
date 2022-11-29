@@ -1,7 +1,10 @@
 import "./DoctorProfile.css";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import StarRatings from "react-star-ratings";
+import EditIcon from "@mui/icons-material/Edit";
+import IconButton from "@mui/material/IconButton";
+import Modal from "../components/Modal";
 
 export default function DoctorProfile() {
   const fullName = useSelector((state) => state.doctorInfo.name);
@@ -14,6 +17,8 @@ export default function DoctorProfile() {
   const reviews = useSelector((state) => state.doctorInfo.reviews);
   const services = useSelector((state) => state.doctorInfo.services);
   const offices = useSelector((state) => state.doctorInfo.offices);
+  const [serviceModalOpen, setServiceModalOpen] = useState(false);
+  const [officeModalOpen, setOfficeModalOpen] = useState(false);
 
   return (
     <div className="doctorProfileGrid">
@@ -65,7 +70,23 @@ export default function DoctorProfile() {
         })}
       </div>
       <div className="doctorProfileCard doctorServicesCard">
-        <p className="bottonCardTitle">Services</p>
+        <div className="header">
+          <p className="bottonCardTitle">Services</p>
+          <IconButton
+            sx={{
+              color: "#2D3A64",
+            }}
+            onClick={() => setServiceModalOpen(true)}
+          >
+            <input hidden accept="image/*" type="file" />
+            <EditIcon />
+          </IconButton>
+          
+        </div>
+        <div className="serviceModalContainer">
+          {serviceModalOpen && <Modal setOpen={setServiceModalOpen} title="Services" ask1="Service Name" ask2="Description" />}
+        </div>
+        
         {services.list.map((service) => {
           return (
             <div className="doctorServices">
@@ -76,7 +97,21 @@ export default function DoctorProfile() {
         })}
       </div>
       <div className="doctorProfileCard doctorOfficesCard">
-        <p className="bottonCardTitle">Offices</p>
+        <div className="header">
+          <p className="bottonCardTitle">Offices</p>
+          <IconButton
+            sx={{
+              color: "#2D3A64",
+            }}
+            onClick={() => setOfficeModalOpen(true)}
+          >
+            <input hidden accept="image/*" type="file" />
+            <EditIcon />
+          </IconButton>
+        </div>
+        <div className="officeModalContainer">
+          {officeModalOpen && <Modal setOpen={setOfficeModalOpen} title="Offices" ask1="Office Name" ask2="Address" />}
+        </div>
         {offices.list.map((office) => {
           return (
             <div className="doctorOffices">

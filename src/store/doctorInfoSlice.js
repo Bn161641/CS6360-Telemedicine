@@ -63,7 +63,7 @@ const doctorInfoSlice = createSlice({
       state.services.changed = true;
     },
     removeService(state, action) {
-      state.services.list.filter(service => service.name != action.payload);
+      state.services.list = state.services.list.filter(service => service.name != action.payload);
       state.services.changed = true;
     },
     setOffices(state, action){
@@ -74,7 +74,7 @@ const doctorInfoSlice = createSlice({
       state.offices.changed = true;
     },
     removeOffice(state, action) {
-      state.offices.list.filter(office => office.id != action.payload);
+      state.offices.list = state.offices.list.filter(office => office.id != action.payload);
       state.offices.changed = true;
     },
     setReviews(state, action){

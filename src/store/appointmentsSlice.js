@@ -21,7 +21,7 @@ const appointmentsSlice = createSlice({
         pid: action.payload.pid,
         pidName: action.payload.pidName,
         did: action.payload.did,
-        did: action.payload.didName,
+        didName: action.payload.didName,
         url: action.payload.url,
         location: action.payload.location,
         service: action.payload.service,

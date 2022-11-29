@@ -1,12 +1,8 @@
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
-import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Typography from "@mui/material/Typography";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useState, Fragment, useRef, useEffect } from "react";
@@ -14,7 +10,6 @@ import CheckIcon from "@mui/icons-material/Check";
 import "./DoctorAppointmentTableRow.css";
 import { format } from "date-fns";
 import dayjs from "dayjs";
-import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
@@ -34,9 +29,6 @@ export default function Row(props) {
 
   const [billCost, setBillCost] = useState(row.bill ? row.bill.amount : "");
   const [appointmentNotes, setAppointmentNotes] = useState(row.notes);
-  const appointments = useSelector(
-    (state) => state.appointmentInfo.appointments
-  );
 
   function handleChange(time) {
     setAppointmentTime(time);
@@ -77,7 +69,6 @@ export default function Row(props) {
   function updateNote(event) {
     event.preventDefault();
     dispatch(appointmentsActions.editNote({id: row.id, notes: appointmentNotes}))
-    console.log(appointments)
   }
 
   return (
