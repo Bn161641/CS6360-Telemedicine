@@ -110,21 +110,20 @@
   font-size: 20px;
 }
 
-.ReviewStars{
-  margin: auto;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+.doctorReview{
+  margin-bottom: 10px;
 }
 
 .doctorReviewerName{
   display: inline-block;
   width: 50px;
   font-weight: bold;
+  margin: 0;
 }
 
 .doctorReviewerComment{
   margin: 0;
-  margin-top: -10px;
+  margin-top: -5px;
 }
 
 .doctorServicesCard {
@@ -133,9 +132,37 @@
   text-align: left;
 }
 
+.doctorServices{
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 10px;
+}
+
+.doctorServiceName{
+  flex: 4;
+  font-weight: bold;
+  margin: 0;
+}
+
+.doctorServiceDescription{
+  flex: 6;
+  margin: 0;
+}
+
 .doctorOfficesCard {
   grid-area: offices;
   overflow-y: scroll;
   text-align: left;
 }
 
+.doctorOffices p{
+  margin: 0;
+}
+
+.doctorOffices{
+  margin-bottom: 10px;
+}
+
+.doctorOfficeName{
+  font-weight: bold;
+}

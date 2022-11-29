@@ -12,17 +12,8 @@ export default function DoctorProfile() {
   const address = useSelector((state) => state.doctorInfo.address);
   const website = useSelector((state) => state.doctorInfo.website);
   const reviews = useSelector((state) => state.doctorInfo.reviews);
-  const [averageStars, setAverageStars] = useState(0);
-
-  useEffect(() => {
-    let sum = 0;
-
-    reviews.forEach((review) => {
-      sum += review.rating;
-    });
-
-    setAverageStars(sum / reviews.length);
-  }, [reviews]);
+  const services = useSelector((state) => state.doctorInfo.services);
+  const offices = useSelector((state) => state.doctorInfo.offices);
 
   return (
     <div className="doctorProfileGrid">
@@ -75,9 +66,25 @@ export default function DoctorProfile() {
       </div>
       <div className="doctorProfileCard doctorServicesCard">
         <p className="bottonCardTitle">Services</p>
+        {services.list.map((service) => {
+          return (
+            <div className="doctorServices">
+              <p className="doctorServiceName">{service.name}:</p>
+              <p className="doctorServiceDescription">{service.description}</p>
+            </div>
+          );
+        })}
       </div>
       <div className="doctorProfileCard doctorOfficesCard">
         <p className="bottonCardTitle">Offices</p>
+        {offices.list.map((office) => {
+          return (
+            <div className="doctorOffices">
+              <p className="doctorOfficeName">{office.name}</p>
+              <p className="doctorOfficeAddress">{office.address}</p>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

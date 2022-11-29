@@ -30,6 +30,7 @@ export function fetchAppointmentData() {
         notes: String,
         isValid: Boolean,
         pid: Number,
+        pidName: String,
         did: Number,
         url: String,        //null if none
         location: String,   //null if none
@@ -54,8 +55,9 @@ export function fetchAppointmentData() {
           id: 1,
           dateTime: new Date('December 1, 2020 08:30:00'),
           notes: "Surgery for the elbow",
-          isValid: false,
+          isValid: true,
           pid: 1,      //patient id
+          pidName: "Robert Lee",
           did: 1,      //doctor id
           url: "www.teams.com/d38djd",
           location: null,
@@ -68,6 +70,7 @@ export function fetchAppointmentData() {
           notes: "Surgery for the foot",
           isValid: false,
           pid: 2,      //patient id
+          pidName: "Johnson Raker",
           did: 1,      //doctor id
           url: null,
           location: "1234 Makebelieve Dr, Richardson, TX 75080",

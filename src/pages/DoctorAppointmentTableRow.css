@@ -1,0 +1,76 @@
+.checkedIcon{
+  fill: #2D3A64;
+  margin-left: 10px;
+}
+
+/* .doctionAppointmentLocationExpander{
+  display: flex;
+  gap: 1rem;
+}
+
+.doctionAppointmentLocationExpanderTitle{
+  margin: 0;
+  font-weight: bold;
+}
+
+.doctionAppointmentLocationExpanderDetail{
+  margin: 0;
+} */
+
+.doctorAppointmentExpander{
+  display: flex;
+  gap: 1.5rem;
+  width: 100%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.doctorAppointmentExpanderVerify{
+  display: flex;
+  align-items: center;
+}
+
+.doctorAppointmentExpanderVerifyForm{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.doctorAppointmentExpanderVerifyButton{
+  background-color: white;
+  color: #2D3A64;
+  border: 1px solid #2D3A64;
+  border-radius: .5rem;
+  padding: 10px;
+}
+
+.doctorAppointmentExpanderVerifyButton:hover{
+  background-color: #2D3A64;
+  color: white
+}
+
+.doctorAppointmentExpanderBillTitle{
+  font-weight: bold;
+}
+
+.doctorAppointmentExpanderBill{
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.doctorAppointmentExpanderBillForm{
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.doctorAppointmentExpanderLocation{
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.doctionAppointmentLocationExpanderTitle{
+  font-weight: bold;
+}
