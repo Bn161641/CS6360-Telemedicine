@@ -85,7 +85,7 @@ export default function Row(props) {
             row.bill.isPaid && row.bill.isVerified ? (
               <CheckIcon className="checkedIcon" />
             ) : (
-              row.bill.amount
+              "$" + row.bill.amount
             )
           ) : (
             ""
