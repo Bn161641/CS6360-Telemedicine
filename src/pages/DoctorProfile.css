@@ -97,7 +97,7 @@
 
 .doctorReviewsCard {
   grid-area: reviews;
-  overflow-y: scroll;
+  overflow-y: auto;
   text-align: left;
 }
 
@@ -128,7 +128,7 @@
 
 .doctorServicesCard {
   grid-area: services;
-  overflow-y: scroll;
+  overflow-y: auto;
   text-align: left;
 }
 
@@ -151,7 +151,7 @@
 
 .doctorOfficesCard {
   grid-area: offices;
-  overflow-y: scroll;
+  overflow-y: auto;
   text-align: left;
 }
 

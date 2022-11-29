@@ -9,7 +9,7 @@ import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { useState, Fragment } from "react";
+import { useState, Fragment, useRef, useEffect } from "react";
 import CheckIcon from "@mui/icons-material/Check";
 import "./DoctorAppointmentTableRow.css";
 import { format } from "date-fns";
@@ -28,7 +28,7 @@ import Input from "@mui/material/Input";
 
 export default function Row(props) {
   const dispatch = useDispatch();
-  const { row } = props;
+  const { row, deleteMode } = props;
   const [open, setOpen] = useState(false);
   const [appointmentTime, setAppointmentTime] = useState(dayjs(row.dateTime));
 
@@ -50,7 +50,6 @@ export default function Row(props) {
       })
     );
     dispatch(appointmentsActions.verifyAppointment(row.id));
-    console.log(appointments);
   }
 
   function createBill(event) {
@@ -68,9 +67,15 @@ export default function Row(props) {
     );
   }
 
+  function deleteAppointment(){
+    if(deleteMode){
+      dispatch(appointmentsActions.removeAppointments(row.id));
+    }
+  }
+
   return (
     <Fragment>
-      <TableRow>
+      <TableRow onClick={deleteAppointment} className={deleteMode ? "doctorTableRow" : ""}>
         <TableCell align="left">
           {row.isValid ? <CheckIcon className="checkedIcon" /> : ""}
         </TableCell>

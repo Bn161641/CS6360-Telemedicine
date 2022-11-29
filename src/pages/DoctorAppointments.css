@@ -25,6 +25,7 @@
 
 .doctorAppointmentSelectDate{
   position: relative;
+  margin-right: 1rem;
 }
 
 .doctorAppointmentSelectDateInputCalendar {
@@ -38,4 +39,21 @@
 
 .doctorAppointmentTable{
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+
+.doctorAppointmentDeleteButtonOff{
+  background-color: white;
+  color: red;
+  border: 1px solid red;
+  border-radius: 0.5rem;
+  padding: 10px;
+}
+
+.doctorAppointmentDeleteButtonOn, .doctorAppointmentDeleteButtonOff:hover{
+  background-color: red;
+  color: white;
+  border: 1px solid red;
+  border-radius: 0.5rem;
+  padding: 10px;
 }

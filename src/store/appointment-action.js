@@ -53,7 +53,7 @@ export function fetchAppointmentData() {
       let tmpAppointment = [
         {
           id: 1,
-          dateTime: new Date('December 1, 2020 08:30:00'),
+          dateTime: new Date('December 1, 2022 08:30:00'),
           notes: "Surgery for the elbow",
           isValid: true,
           pid: 1,      //patient id
@@ -66,7 +66,7 @@ export function fetchAppointmentData() {
         },
         {
           id: 2,
-          dateTime: new Date('December 1, 2020 08:30:00'),
+          dateTime: new Date('December 1, 2022 08:30:00'),
           notes: "Surgery for the foot",
           isValid: false,
           pid: 2,      //patient id
@@ -80,6 +80,19 @@ export function fetchAppointmentData() {
             isPaid: false,
             isVerified: false
           },
+        },
+        {
+          id: 3,
+          dateTime: new Date('December 4, 2022 08:30:00'),
+          notes: "RemoveToe",
+          isValid: false,
+          pid: 3,      //patient id
+          pidName: "Daniel Raker",
+          did: 1,      //doctor id
+          url: null,
+          location: "1234 Makebelieve Dr, Richardson, TX 75080",
+          service: "Surgery",
+          bill: null
         }
       ];
       dispatch(appointmentsActions.replaceAppointments(tmpAppointment));

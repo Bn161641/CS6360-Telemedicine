@@ -2,7 +2,7 @@ import "./DoctorAppointments.css";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { useEffect, useRef, useState} from "react";
+import { useEffect, useRef, useState } from "react";
 import { DateRange } from "react-date-range";
 
 import "react-date-range/dist/styles.css";
@@ -19,27 +19,31 @@ import TextField from "@mui/material/TextField";
 import Row from "./DoctorAppointmentTableRow";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-
-
+import { addDays } from "date-fns";
 
 export default function DoctorProfile() {
   const [dropDown, setDropDown] = useState("All");
   const todayDate = new Date();
-  const weekAfterToday = new Date();
-  weekAfterToday.setDate(todayDate.getDate() + 7);
+
   const [range, setRange] = useState([
     {
       startDate: todayDate,
-      endDate: weekAfterToday,
+      endDate: addDays(todayDate, 7),
       key: "selection",
     },
   ]);
+
   const [open, setOpen] = useState(false);
   const wrapperRef = useRef(null);
   const params = useParams();
   const { id: doctorId } = params;
-  const appointments = useSelector((state) => state.appointmentInfo.appointments);
-  const doctorAppointment = appointments.filter((appointment) => parseInt(appointment.did) === parseInt(doctorId));
+  const appointments = useSelector(
+    (state) => state.appointmentInfo.appointments
+  );
+  const doctorAppointment = appointments.filter(
+    (appointment) => parseInt(appointment.did) === parseInt(doctorId)
+  );
+  const [deleteMode, setDeleteMode] = useState(false);
 
   useEffect(() => {
     document.addEventListener("click", exitOut, true);
@@ -97,6 +101,16 @@ export default function DoctorProfile() {
             </div>
           </div>
         )}
+        <button
+          className={
+            deleteMode
+              ? "doctorAppointmentDeleteButtonOn"
+              : "doctorAppointmentDeleteButtonOff"
+          }
+          onClick={() => setDeleteMode((prevState) => !prevState)}
+        >
+          Delete Appointments
+        </button>
       </div>
       <TableContainer className="doctorAppointmentTable" component={Paper}>
         <Table aria-label="collapsible table">
@@ -111,19 +125,30 @@ export default function DoctorProfile() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {doctorAppointment.filter((appointment) => {
-              if(dropDown === "All"){
-                return true;
-              }
-              if(range[0].startDate <= appointment.dateTime && range[0].startDate.getDate() + 1 > appointment.dateTime){
-                return true;
-              }
-              else{
-                return false;
-              }
-            }).map((appointment) => (
-              <Row key={appointment.id} row={appointment} />
-            ))}
+            {doctorAppointment
+              .filter((appointment) => {
+                if (dropDown === "All") {
+                  return true;
+                }
+
+                let dayAfterEnd = addDays(range[0].endDate, 1);
+
+                if (
+                  range[0].startDate <= appointment.dateTime &&
+                  dayAfterEnd > appointment.dateTime
+                ) {
+                  return true;
+                } else {
+                  return false;
+                }
+              })
+              .map((appointment) => (
+                <Row
+                  key={appointment.id}
+                  row={appointment}
+                  deleteMode={deleteMode}
+                />
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
