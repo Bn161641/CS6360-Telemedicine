@@ -86,7 +86,7 @@ export function fetchAppointmentData() {
         {
           id: 3,
           dateTime: new Date('December 4, 2022 08:30:00'),
-          notes: "Remove Toe",
+          notes: "Place ice on the removed toe area",
           isValid: false,
           pid: 3,      //patient id
           pidName: "Daniel Raker",
@@ -94,8 +94,26 @@ export function fetchAppointmentData() {
           didName: "Helena Hall",
           url: null,
           location: "1234 Makebelieve Dr, Richardson, TX 75080",
-          service: "Surgery",
+          service: "Remove Toe",
           bill: null
+        },
+        {
+          id: 4,
+          dateTime: new Date('December 6, 2022 08:30:00'),
+          notes: "Put ice on the new toe",
+          isValid: true,
+          pid: 4,      //patient id
+          pidName: "Daniel Raker",
+          did: 1,      //doctor id
+          didName: "Helena Hall",
+          url: "www.teams.com/ldfjoia",
+          location: null,
+          service: "Add a Toe",
+          bill: {
+            amount: 199.99,
+            isPaid: true,
+            isVerified: true
+          },
         }
       ];
       dispatch(appointmentsActions.replaceAppointments(tmpAppointment));

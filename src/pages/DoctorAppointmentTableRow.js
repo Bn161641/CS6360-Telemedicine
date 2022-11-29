@@ -217,6 +217,10 @@ export default function Row(props) {
                   <div className="doctorAppointmentExpanderLocation"></div>
                 )}
               </div>
+              <div className="doctorAppointmentServiceContainer">
+                <p className="doctorAppointmentServiceContainerTitle">Service: </p>
+                <p className="doctorAppointmentServiceContainerDetail">{row.service}</p>
+              </div>
               <div className="doctorAppointmentExpanderBottom">
                 <p className="doctorAppointmentExpanderBottomTitle">Notes</p>
                 <form className="doctorAppointmentExpanderBottomTitleForm" onSubmit={updateNote}>

@@ -118,3 +118,21 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.doctorAppointmentServiceContainer{
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.doctorAppointmentServiceContainerTitle{
+  font-weight: bold;
+  font-size: 20px;
+  margin: 0;
+}
+
+.doctorAppointmentServiceContainerDetail{
+  margin: 0;
+  font-size: 20px;
+}
