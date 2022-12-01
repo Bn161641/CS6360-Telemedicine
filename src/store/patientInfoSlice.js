@@ -8,16 +8,8 @@ const patientInitialState = {
   address: "",
   info: "",
   website: "",
-  title: "",
+  city: "",
   state: "",
-  hospitalName: "",
-  services: {
-    list: [],
-    changed: false},
-  offices: {
-    list: [],
-    changed: false},
-  reviews: [],
   appointments: [],
   listOfDoctor: [],
 };
@@ -53,33 +45,11 @@ const patientInfoSlice = createSlice({
     setState(state, action){
       state.state = action.payload;
     },
-    setHospitalName(state, action){
-      state.hospitalName = action.payload;
+    setCity(state, action){
+      state.city = action.payload;
     },
-    setServices(state, action){
-      state.services.list = action.payload;
-    },
-    addService(state, action) {
-      state.services.list.push(action.payload);
-      state.services.changed = true;
-    },
-    removeService(state, action) {
-      state.services.list = state.services.list.filter(service => service.name != action.payload);
-      state.services.changed = true;
-    },
-    setOffices(state, action){
-      state.offices.list = action.payload;
-    },
-    addOffice(state, action) {
-      state.offices.list.push(action.payload);
-      state.offices.changed = true;
-    },
-    removeOffice(state, action) {
-      state.offices.list = state.offices.list.filter(office => office.id != action.payload);
-      state.offices.changed = true;
-    },
-    setReviews(state, action){
-      state.reviews = action.payload;
+    setListOfDoctors(state, action) {
+      state.listOfDoctor = action.payload;
     }
   }
 });
