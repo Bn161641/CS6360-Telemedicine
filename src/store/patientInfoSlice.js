@@ -19,6 +19,7 @@ const patientInitialState = {
     changed: false},
   reviews: [],
   appointments: [],
+  listOfDoctor: [],
 };
 
 const patientInfoSlice = createSlice({

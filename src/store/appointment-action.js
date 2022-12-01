@@ -1,6 +1,7 @@
 import { appointmentsActions } from "./appointmentsSlice";
 
 export function fetchAppointmentData() {
+  // console.log("Fetching information");
   return async (dispatch) => {
     //this is where you fetch the list of appointments
     function fetchData() {
@@ -32,6 +33,7 @@ export function fetchAppointmentData() {
         pid: Number,
         pidName: String,
         did: Number,
+        didName: String
         url: String,        //null if none
         location: String,   //null if none
         service: String,
@@ -125,6 +127,7 @@ export function fetchAppointmentData() {
 };
 
 export function sendAppointmentData(appointments){
+  // console.log("sending information");
   return async (dispatch) => {
 
     //everytime the list of appointments changes this funciton is called
