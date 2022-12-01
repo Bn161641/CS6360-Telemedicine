@@ -6,18 +6,10 @@ import TextField from "@mui/material/TextField";
 import { useDispatch } from "react-redux";
 import { doctorInfoActions } from "../store/doctorInfoSlice";
 
-/*
-props.ask1
-props.ask2
-props.list
-props.title
-
-*/
 export default function Modal(props) {
   const dispatch = useDispatch();
   const services = useSelector((state) => state.doctorInfo.services);
   const offices = useSelector((state) => state.doctorInfo.offices);
-  const doctorInfo = useSelector((state) => state.doctorInfo);
   const [list, setList] = useState([]);
   const [deleteMode, setDeleteMode] = useState(false);
   const modalRef = useRef(null);
