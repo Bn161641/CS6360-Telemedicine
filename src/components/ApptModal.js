@@ -9,7 +9,7 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { fetchDoctorInfo } from "../store/doctorInfo-action";
 
-import { TextField, Checkbox, FormGroup, FormControlLabel } from '@mui/material';
+import { TextField, Checkbox, FormGroup, FormControlLabel, FormControl, Select, InputLabel, MenuItem } from '@mui/material';
 
 /*
 props.ask1
@@ -29,11 +29,32 @@ export default function ApptModal(props) {
   const modalRef = useRef(null);
   const [addListName, setAddListName] = useState("");
   const [addListDetail, setAddListDetail] = useState("");
-  const [doctor, setDoctor] = useState("");
+  const [doctor, setDoctor] = useState({
+    id: -1,
+  name: "",
+  email: "",
+  phoneNumber: "",
+  address: "",
+  info: "",
+  website: "",
+  title: "",
+  state: "",
+  hospitalName: "",
+  services: {
+    list: [],
+    changed: false},
+  offices: {
+    list: [],
+    changed: false},
+  reviews: [],
+  appointments: [],
+  });
   const [date, setDate] = useState(new Date());
   const [location, setLocation] = useState("");
   const [service, setService] = useState("");
   const [online, setOnline] = useState(false);
+  const [doctorName, setDoctorName] = useState("");
+  const [doctorSelected, setDoctorSelected] = useState(false);
 
   useEffect(() => {
     if (props.title === "Services") {
@@ -58,9 +79,12 @@ export default function ApptModal(props) {
     }
   }, [services, offices]);
 
-  useEffect(() => {
-    document.addEventListener("click", exitOutModal, true);
-  }, []);
+  // useEffect(() => {
+  //   document.addEventListener("click", exitOutModal, true);
+  // }, []);
+
+  //somehow the select dropdown is not contained within the modal, so clicking the select will close the modal
+  //maybe the dropdown menu is not considered part of the modal
 
   function exitOutModal(event) {
     if (modalRef.current && !modalRef.current.contains(event.target)) {
@@ -82,20 +106,24 @@ export default function ApptModal(props) {
     //fetchDoctorInfo(parseInt(did));
     //how to get info about a doctor? per id -- i.e. update doctorInfo whenever did changes
     //alert(doctorInfo.name);
+
+    //patientInfo.listOfDoctor
+    //search
+    let newId = Math.floor(Math.random() * 1000) + 100;
     let appt = {
-      id: 0, //how to get unused id
+      id: newId,
       dateTime: date,
       notes: "",
       isValid: false,
       pid: patientInfo.id, //nan -- issue with parsing?
       pidName: patientInfo.name,
-      did: doctor,
-      didName: "doctor", //fetch by id
+      did: doctor.id,
+      didName: doctor.name, //fetch by id
       url: online ? location : null, //how to generate url
       location: online ? null : location,   //null if none
       service: service,
-      bill: null //create bill 
-    }
+      bill: null
+    };
     dispatch(appointmentsActions.addAppointment(appt));
     //close modal?
   }
@@ -136,14 +164,31 @@ export default function ApptModal(props) {
                 ))}*/}
               <div className="modalBodyListContainer">
                 <div className="bodyListNameInputContainer">
-                  <TextField
+                  {/*<TextField
                     className="bodyListNameInput"
                     size="small"
                     label="DoctorID"
                     variant="outlined"
                     value={doctor}
                     onChange={(event) => setDoctor(event.target.value)}
-                  />
+                  />*/}
+                  <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                    <InputLabel>Doctor</InputLabel>
+                    <Select
+                      value={doctorSelected ? doctor : ""}
+                      onChange={(event) => {
+                        setDoctor(event.target.value);
+                        setDoctorSelected(true);
+                      }}
+                      label="Doctor"
+                    >
+
+                      {patientInfo.listOfDoctor.map((doc) => (
+                        <MenuItem value={doc}>{doc.name}</MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DateTimePicker
                       label="Date"
@@ -161,28 +206,56 @@ export default function ApptModal(props) {
                       )}
                     />
                   </LocalizationProvider>
-                  <TextField
+                  {/*<TextField
                     className="bodyListNameInput"
                     size="small"
-                    label={online ? "URL" : "Location"}
+                    label="Location"
                     variant="outlined"
                     value={location}
                     onChange={(event) => setLocation(event.target.value)}
-                  />
+                    disabled={online}
+                        />*/}
+                  <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                    <InputLabel>Location</InputLabel>
+                    <Select
+                      value={online ? "online" : location}
+                      onChange={(event) => setLocation(event.target.value)}
+                      label="Location"
+                      disabled={!doctorSelected || online}
+                    >
+                      {online ? <MenuItem value="online">Online</MenuItem> : <div></div>}
+                      {doctor.offices.list.map((office) => (
+                        <MenuItem value={office}>{office}</MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
                   <FormGroup>
                     <FormControlLabel control={
-                    <Checkbox 
-                      onChange={() => {setOnline(!online)}}
-                    />} label="Online" />
+                      <Checkbox
+                        onChange={() => { setOnline(!online) }}
+                      />} label="Online" />
                   </FormGroup>
-                  <TextField
+                  {/*<TextField
                     className="bodyListNameInput"
                     size="small"
                     label="Service"
                     variant="outlined"
                     value={service}
                     onChange={(event) => setService(event.target.value)}
-                  />
+                  />*/}
+                  <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                    <InputLabel>Service</InputLabel>
+                    <Select
+                      value={service}
+                      onChange={(event) => setService(event.target.value)}
+                      label="Service"
+                      disabled={!doctorSelected}
+                    >
+                      {doctor.services.list.map((service) => (
+                        <MenuItem value={service}>{service}</MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
                 </div>
               </div>
             </div>
