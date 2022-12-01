@@ -1,13 +1,11 @@
 import SearchIcon from '@mui/icons-material/Search';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import "./Patient.css";
 import "./PatientTopNav.css";
 
 export default function PatientTopNav(props) {
-  const fullName = useSelector(state => state.patientInfo.name);
   const location = useLocation();
   const [page, setPage] = useState("");
 

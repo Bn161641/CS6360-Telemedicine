@@ -136,3 +136,19 @@
   margin: 0;
   font-size: 20px;
 }
+
+#buttonPayBill{
+  background-color: white;
+  color: blue;
+  border: 1px solid blue;
+  border-radius: 0.5rem;
+  padding: 10px;
+}
+
+#buttonPayBill:hover{
+  background-color: blue;
+  color: white;
+  border: 1px solid blue;
+  border-radius: 0.5rem;
+  padding: 10px;
+}

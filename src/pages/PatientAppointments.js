@@ -124,9 +124,9 @@ export default function PatientProfile() {
         <Table aria-label="collapsible table">
           <TableHead>
             <TableRow>
-              <TableCell>Validate</TableCell>
+              <TableCell>Confirmed</TableCell>
               <TableCell align="center">Bill</TableCell>
-              <TableCell align="center">DoctorID</TableCell>
+              <TableCell align="center">Doctor</TableCell>
               <TableCell align="center">Location</TableCell>
               <TableCell align="center">Date Time</TableCell>
               <TableCell />

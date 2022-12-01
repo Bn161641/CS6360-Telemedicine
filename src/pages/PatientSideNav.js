@@ -20,11 +20,9 @@ export default function PatientSideNav(props) {
         src={require("../asset/patient.jpg")}
       />
       <p className="patientName">{props.fullName}</p>
-      <p className="patientTitle">{props.title}</p>
-      <p className="patientHospital">@{props.hospitalName}</p>
       <p className="patientState">
         <LocationOnIcon />
-        {props.state}
+        {props.city + ", " + props.state}
       </p>
       <ul className="patientSidebarMenu">
         <li>

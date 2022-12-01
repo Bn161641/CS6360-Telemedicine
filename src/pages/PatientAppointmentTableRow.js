@@ -5,21 +5,15 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { useState, Fragment, useRef, useEffect } from "react";
+import { useState, Fragment } from "react";
 import CheckIcon from "@mui/icons-material/Check";
 import "./PatientAppointmentTableRow.css";
 import { format } from "date-fns";
 import dayjs from "dayjs";
 import TextField from "@mui/material/TextField";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { useSelector, useDispatch } from "react-redux";
+import {  useDispatch } from "react-redux";
 import { appointmentsActions } from "../store/appointmentsSlice";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import InputAdornment from "@mui/material/InputAdornment";
-import Input from "@mui/material/Input";
+
 
 export default function Row(props) {
   const dispatch = useDispatch();
@@ -29,21 +23,6 @@ export default function Row(props) {
 
   const [billCost, setBillCost] = useState(row.bill ? row.bill.amount : "");
   const [appointmentNotes, setAppointmentNotes] = useState(row.notes);
-
-  function handleChange(time) {
-    setAppointmentTime(time);
-  }
-
-  function validateAppointment(event) {
-    event.preventDefault();
-    dispatch(
-      appointmentsActions.alterAppointment({
-        id: row.id,
-        dateTime: appointmentTime.toDate(),
-      })
-    );
-    dispatch(appointmentsActions.verifyAppointment(row.id));
-  }
 
   function payBill(event) {
     event.preventDefault();
@@ -56,31 +35,12 @@ export default function Row(props) {
     dispatch(appointmentsActions.payBill(row.id));
   }
 
-  function createBill(event) {
-    event.preventDefault();
-    let bill = {
-      amount: billCost,
-      isPaid: false,
-      isVerified: false,
-    };
-    dispatch(
-      appointmentsActions.createBill({
-        bill,
-        appointmentId: row.id,
-      })
-    );
-  }
-
   function deleteAppointment() {
     if (deleteMode) {
       dispatch(appointmentsActions.removeAppointments(row.id));
     }
   }
 
-  function updateNote(event) {
-    event.preventDefault();
-    dispatch(appointmentsActions.editNote({ id: row.id, notes: appointmentNotes }))
-  }
 
   return (
     <Fragment>
@@ -91,8 +51,8 @@ export default function Row(props) {
         <TableCell align="left">
           {row.isValid ? <CheckIcon className="checkedIcon" /> : ""}
         </TableCell>
-        <TableCell align="center">
-          {row.bill ? (
+        <TableCell align="center"> {/* somehow an empty bill is being created which then shows "$undefined" for bill.amount, so added additional check for bill.amount to be defined */}
+          {row.bill && row.bill.amount ? ( 
             row.bill.isPaid && row.bill.isVerified ? (
               <CheckIcon className="checkedIcon" />
             ) : (
@@ -102,7 +62,7 @@ export default function Row(props) {
             ""
           )}
         </TableCell>
-        <TableCell align="center">{row.did}</TableCell>
+        <TableCell align="center">{row.didName}</TableCell>
         <TableCell align="center">
           {row.location ? row.location : "Online"}
         </TableCell>
@@ -125,61 +85,14 @@ export default function Row(props) {
             <Box sx={{ margin: 1 }}>
               <div className="patientAppointmentExpanderTop">
                 <div className="patientAppointmentExpanderVerify">
-                  {/*<form
-                    onSubmit={validateAppointment}
-                    className="patientAppointmentExpanderVerifyForm"
-                  >
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <DateTimePicker
-                        label="Date"
-                        value={appointmentTime}
-                        onChange={handleChange}
-                        renderInput={(params) => (
-                          <TextField
-                            style={{ width: "200px" }}
-                            InputLabelProps={{
-                              shrink: true,
-                            }}
-                            variant="standard"
-                            {...params}
-                          />
-                        )}
-                      />
-                          </LocalizationProvider>
-                          <p className="patientAppointmentServiceContainerTitle">Date Time:</p>
-                          {format(row.dateTime, "MM/dd/yyyy hh:mm aaaa")}
-                    {/*<button
-                      className="patientAppointmentExpanderVerifyButton"
-                      type="submit"
-                    >
-                      Edit Date
-                    </button>
-                  </form>
-                </div>
-                          <div className="patientAppointmentExpanderBill">*/}
-                  {/*<p className="patientAppointmentExpanderBillTitle">Set Bail</p>
-                  <form
-                    className="patientAppointmentExpanderBillForm"
-                    onSubmit={createBill}
-                  >
-                    <FormControl variant="standard">
-                      <InputLabel htmlFor="standard-adornment-amount">
-                        Amount
-                      </InputLabel>
-                      <Input
-                        type="number"
-                        style={{ width: "100px" }}
-                        value={billCost}
-                        onChange={(event) => setBillCost(event.target.value)}
-                        startAdornment={
-                          <InputAdornment position="start">$</InputAdornment>
-                        }
-                      />
-                      </FormControl>*/}
+                  
+                      {/* !!!!!!!!!!!!!!! only show verified and paid if the bill exists */}
+                      {/* don't need edit appointment}*/}
+                      {row.bill && row.bill.amount ? <div>
                     <TextField
                       style={{ width: "50px" }}
                       disabled
-                      label="Verified"
+                      label="Verified" 
                       readOnly
                       value={
                         row.bill
@@ -203,7 +116,9 @@ export default function Row(props) {
                           : "false"
                       }
                       variant="standard"
-                    />
+                    /> 
+                    </div> : <div></div>
+                    }
                     {/*<button
                       className="patientAppointmentExpanderVerifyButton patientAppointmentExpanderBillButton"
                       type="submit"
@@ -237,27 +152,9 @@ export default function Row(props) {
               <div className="patientAppointmentExpanderBottom">
                 <p className="patientAppointmentExpanderBottomTitle">Notes</p>
                 <div className="appointmentNoteContainer">{appointmentNotes}</div>
-                {/*<form className="patientAppointmentExpanderBottomTitleForm" onSubmit={updateNote}>
-                  <div className="appointmentNoteContainer">
-                    <TextField
-                      style={{ width: "100%", backgroundColor: "#EAF3FA" }}
-                      multiline
-                      rows={3}
-                      value={appointmentNotes}
-                      variant="standard"
-                      onChange={(event) =>
-                        setAppointmentNotes(event.target.value)
-                      }
-                    />
-                  </div>
-                  <div className="appointmentNoteButtonContainer">
-                    <button type="submit" className="appointmentNoteButton">
-                      Submit Notes
-                    </button>
-                  </div>
-                    </form>*/}
-                <button>Edit Appointment</button>
-                <button onClick={payBill}>Pay Bill</button>
+                {row.bill && row.bill.amount ? 
+                <button id="buttonPayBill" onClick={payBill}>Pay Bill</button> :
+                <div></div> }
               </div>
             </Box>
           </Collapse>
