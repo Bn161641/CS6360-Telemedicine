@@ -55,6 +55,13 @@ const appointmentsSlice = createSlice({
       state.appointments[appointmentToCreateBillForIndex].bill = newBill;
       state.changed = true;
     },
+    payBill(state, action) {
+      let index = state.appointments.findIndex(appointment => appointment.id === action.payload);
+      if(state.appointments[index].bill) {
+        state.appointments[index].bill.isPaid = true;
+      }
+      state.changed = true;
+    },
     editNote(state, action){
       let appointmentToEditNoteIndex = state.appointments.findIndex(appointment => appointment.id === action.payload.id);
       state.appointments[appointmentToEditNoteIndex].notes = action.payload.notes;

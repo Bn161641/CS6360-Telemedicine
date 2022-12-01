@@ -7,6 +7,8 @@ import PatientPage from "./pages/PatientPage";
 import SystemUser from "./pages/SystemUser";
 import DoctorProfile from "./pages/DoctorProfile";
 import DoctorAppointments from "./pages/DoctorAppointments";
+import PatientProfile from "./pages/PatientProfile";
+import PatientAppointments from "./pages/PatientAppointments";
 import { useSelector, useDispatch } from 'react-redux';
 import { sendAppointmentData, fetchAppointmentData } from "./store/appointment-action";
 import { useEffect } from "react";
@@ -35,7 +37,11 @@ function App() {
           <Route path=":id/appointments" element={<DoctorAppointments />} />
         </Route>
         <Route path="/system-user" element={<SystemUser />} />
-        <Route path="/patient" element={<PatientPage />} />
+        <Route path="/patient/*" element={<PatientPage />}>
+          <Route path=":id/profile" element={<PatientProfile />} />
+          <Route path=":id/appointments" element={<PatientAppointments />} />
+        </Route>
+
       </Routes>
     </div>
   );
