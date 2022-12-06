@@ -4,9 +4,9 @@
   ```sh
   https://www.postgresql.org/
   ```
-* npm
+* The system need NVM 
   ```sh
-  npm -i
+  https://github.com/nvm-sh/nvm
   ```
 ## Installation
 * Clone the repo
