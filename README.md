@@ -1,10 +1,10 @@
 # CS6360-Telemedicine
 ## Prerequisites
-* The Telemedicine database system need PostgreSQL to run
+* The Telemedicine database system requires PostgreSQL to run
   ```sh
   https://www.postgresql.org/
   ```
-* The system need NVM 
+* The system also requires NVM 
   ```sh
   https://github.com/nvm-sh/nvm
   ```
